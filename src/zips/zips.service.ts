@@ -1,7 +1,7 @@
 import { Model } from 'mongoose';
 import { Injectable } from "@nestjs/common";
 import { InjectModel } from "@nestjs/mongoose";
-import { Zip, ZipDocument } from "./zips.schema";
+import { Zip, ZipDocument } from "./zip.schema";
 
 
 @Injectable()
@@ -13,7 +13,7 @@ export class ZipsService {
         return newZip.save();
     }
 
-    async findAll(): Promise<Zip[]>{
-        return this.zipModel.find().exec();
+    async findAll({limit}:{limit?:number}={}): Promise<Zip[]>{
+        return this.zipModel.find().limit(limit).exec();
     }
 }
